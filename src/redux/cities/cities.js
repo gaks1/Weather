@@ -33,7 +33,7 @@ export const fetchFlights = () => {
       });
 
       if (!response.ok) {
-        const message = `An error has occurred: ${response.status}`;
+        const message = `error ${response.status}`;
         throw new Error(message);
       }
 
