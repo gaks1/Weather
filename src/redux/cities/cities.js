@@ -28,7 +28,7 @@ export const fetchFlights = () => {
       const response = await fetch('https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=PAR&maxPrice=200', {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${toke}`
         }
       });
 
