@@ -18,3 +18,30 @@ export const getFlightsFailure = (error) => ({
   payload: error
 });
 
+export const fetchFlights = () => {
+  return async (dispatch) => {
+    dispatch(getFlightsRequest());
+
+    const token = "YOUR_ACCESS_TOKEN_HERE"; // Retrieve this dynamically
+
+    try {
+      const response = await fetch('https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=PAR&maxPrice=200', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        const message = `error ${response.status}`;
+        throw new Error(message);
+      }
+
+      const data = await response.json();
+      dispatch(getFlightsSuccess(data.data));
+
+    } catch (error) {
+      dispatch(getFlightsFailure(error.message));
+    }
+  };
+};
